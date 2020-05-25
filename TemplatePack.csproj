@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <Version>1.0</Version>
+    <PackageId>Ycode.RestApi</PackageId>
+    <Title>ASP.NET Core Web API with API Documentation</Title>
+    <Authors>Yas Ikeda (ycode.laboratory@gmail.com)</Authors>
+    <Description>A C# project template that contains a simple ASP.NET Core Web API with API documentation by NSwag.</Description>
+    <PackageTags>Web;WebAPI</PackageTags>
+
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>true</IsPackable>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="RestApi/**/*" Exclude="RestApi/**/bin/**;RestApi/**/obj/**" />
+    <Compile Remove="**/*" />
+  </ItemGroup>
+
+</Project>
