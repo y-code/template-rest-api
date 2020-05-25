@@ -1,4 +1,4 @@
-# Project Template of ASP.NET Core Web API with API documentation
+# Project Template of ASP.NET Core Web API with API Documentation
 This is a C# project template for the .NET Core Template Engine. It contains a simple ASP.NET Core Web API with API documentation by NSwag.
 
 ## Installation
@@ -19,4 +19,5 @@ dotnet run
 Now, open [https://localhost:62182/swagger](https://localhost:62182/swagger) in your browser, then you will see Swagger UI of your new Web API.
 
 You can try running the API via this web UI. Expand `Example` and `GET /api/v1/Example`, and click on `Try it out` button and `Execute` button, then you will see the response from the API.
+
 ![API Document Web UI](https://github.com/y-code/RestApi/raw/master/doc/images/swagger-ui.png)
