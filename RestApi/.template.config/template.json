@@ -3,7 +3,7 @@
   "author": "Yas Ikeda <ycode.laboratory@gmail.com>",
   "classifications": [ "Web", "WebAPI" ],
   "identity": "Y-code.restapi",
-  "name": "ASP.NET Core Web API with Swagger",
+  "name": "ASP.NET Core Web API with API Documentation",
   "shortName": "restapi",
   "sourceName": "RestApi",
   "guids": [ "a4f8c1fe-0ae9-49fd-aa9f-4409951594a2" ],
