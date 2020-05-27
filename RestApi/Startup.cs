@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,6 +22,7 @@ namespace RestApi
 
             services.AddApiVersioning(options =>
             {
+                options.Conventions.Add(new VersionByNamespaceConvention());
                 options.ReportApiVersions = true;
             });
 

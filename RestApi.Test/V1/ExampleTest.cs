@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using RestApi.Models.V1;
+using RestApi.Api.V1.Models;
 using RestApi.Test.Models;
 
 namespace RestApi.Test.V1

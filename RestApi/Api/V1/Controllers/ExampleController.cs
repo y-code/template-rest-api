@@ -4,13 +4,17 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RestApi.Models.V1;
+using NSwag.Annotations;
+using RestApi.Api.V1.Models;
 
-namespace RestApi.Controllers.V1
+namespace RestApi.Api.V1.Controllers
 {
+    // Version is determined by Namespace Convention, which is set up in Startup.cs
+    // See more details about the convention in https://github.com/microsoft/aspnet-api-versioning/wiki/API-Version-Conventions
+
     [ApiController]
-    [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
+    [OpenApiTag("API Example: Weather Forecast")]
     public partial class ExampleController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

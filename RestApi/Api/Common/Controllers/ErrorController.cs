@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 
-namespace RestApi.Controllers
+namespace RestApi.Api.Common.Controllers
 {
     [ApiController]
     [ApiVersion("1")]

@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace RestApi.Models.V1
+namespace RestApi.Api.V1.Models
 {
     public class WeatherForecast
     {
