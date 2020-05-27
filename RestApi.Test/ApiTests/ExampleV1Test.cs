@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using RestApi.Models.V1;
+using RestApi.Models;
 using RestApi.Test.Models;
 
-namespace RestApi.Test.V1
+namespace RestApi.Test.ApiTests
 {
     [TestFixture]
-    public class ExampleTest : TestBase
+    public class ExampleV1Test : TestBase
     {
         [TestCase("")]
         [TestCase("/")]
@@ -23,7 +21,7 @@ namespace RestApi.Test.V1
                 using (var stream = await client.OpenReadTaskAsync(
                     new Uri(SetUp.UrlToV1Example + route)))
                 {
-                    var data = await JsonSerializer.DeserializeAsync<WeatherForecast[]>(stream);
+                    var data = await JsonSerializer.DeserializeAsync<WeatherForecastV1[]>(stream);
 
                     Assert.That(data.Length, Is.EqualTo(5));
                 }
@@ -35,12 +33,12 @@ namespace RestApi.Test.V1
         {
             await CatchWebException(async () =>
             {
-                WeatherForecast[] data;
+                WeatherForecastV1[] data;
                 using (var client = new WebClient())
                 using (var stream = await client.OpenReadTaskAsync(
                     new Uri($"{SetUp.UrlToV1Example}/{date}")))
                 {
-                    data = await JsonSerializer.DeserializeAsync<WeatherForecast[]>(stream);
+                    data = await JsonSerializer.DeserializeAsync<WeatherForecastV1[]>(stream);
 
                     Assert.That(data.Length, Is.EqualTo(5));
                     Assert.That(data[0].Date, Is.EqualTo(dates[0]));
@@ -63,7 +61,7 @@ namespace RestApi.Test.V1
                 using (var stream = await client.OpenReadTaskAsync(
                     new Uri($"{SetUp.UrlToV1Example}/{date}")))
                 {
-                    var data = await JsonSerializer.DeserializeAsync<WeatherForecast[]>(stream);
+                    var data = await JsonSerializer.DeserializeAsync<WeatherForecastV1[]>(stream);
                 }
 
                 Assert.Fail("This test should have ended up with an error response.");

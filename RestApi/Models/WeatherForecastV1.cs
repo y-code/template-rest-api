@@ -1,9 +1,11 @@
 using System;
 using System.Text.Json.Serialization;
+using NJsonSchema.Annotations;
 
-namespace RestApi.Models.V1
+namespace RestApi.Models
 {
-    public class WeatherForecast
+    [JsonSchema(name: "WeatherForecast")]
+    public class WeatherForecastV1
     {
         [JsonPropertyName("date")]
         public string Date { get; set; }
