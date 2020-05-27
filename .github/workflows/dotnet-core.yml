@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 3.1.300
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore RestApi.sln
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore RestApi.sln
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test --no-restore --verbosity normal RestApi.sln
