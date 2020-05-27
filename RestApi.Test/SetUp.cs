@@ -12,7 +12,7 @@ namespace RestApi.Test
     [SetUpFixture]
     public class SetUp
     {
-        public const int ApiServiceStartUpTimeoutSeconds = 7;
+        public const int ApiServiceStartUpTimeoutSeconds = 60;
         public static Task ApiService;
 
         public const string ApiServiceBaseUrl = "https://localhost:62184";
