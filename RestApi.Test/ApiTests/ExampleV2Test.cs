@@ -4,13 +4,13 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using RestApi.Models.V2;
+using RestApi.Models;
 using RestApi.Test.Models;
 
-namespace RestApi.Test.V2
+namespace RestApi.Test.ApiTests
 {
     [TestFixture]
-    public class ExampleTest : TestBase
+    public class ExampleV2Test : TestBase
     {
         [TestCase("")]
         [TestCase("/20200303")]
@@ -22,7 +22,7 @@ namespace RestApi.Test.V2
                 using (var stream = await client.OpenReadTaskAsync(
                     new Uri(SetUp.UrlToV2Example + route)))
                 {
-                    var data = await JsonSerializer.DeserializeAsync<WeatherForecast[]>(stream);
+                    var data = await JsonSerializer.DeserializeAsync<WeatherForecastV2[]>(stream);
                 }
 
                 Assert.Fail("This test should have ended up with an error response.");
@@ -48,7 +48,7 @@ namespace RestApi.Test.V2
                 using (var stream = await client.OpenReadTaskAsync(
                     new Uri(SetUp.UrlToV2ExampleWF + route)))
                 {
-                    var data = await JsonSerializer.DeserializeAsync<WeatherForecast[]>(stream);
+                    var data = await JsonSerializer.DeserializeAsync<WeatherForecastV2[]>(stream);
 
                     Assert.That(data.Length, Is.EqualTo(5 * 3));
                 }
@@ -66,7 +66,7 @@ namespace RestApi.Test.V2
                 using (var stream = await client.OpenReadTaskAsync(
                     new Uri($"{SetUp.UrlToV2ExampleWF}?from={date}")))
                 {
-                    var data = await JsonSerializer.DeserializeAsync<WeatherForecast[]>(stream);
+                    var data = await JsonSerializer.DeserializeAsync<WeatherForecastV2[]>(stream);
 
                     Assert.That(data.Length, Is.EqualTo(5 * 3));
                     Assert.That(data.Min(d => d.Date),
@@ -86,7 +86,7 @@ namespace RestApi.Test.V2
                 using (var stream = await client.OpenReadTaskAsync(
                     new Uri($"{SetUp.UrlToV2ExampleWF}?from={date}")))
                 {
-                    var data = await JsonSerializer.DeserializeAsync<WeatherForecast[]>(stream);
+                    var data = await JsonSerializer.DeserializeAsync<WeatherForecastV2[]>(stream);
                 }
 
                 Assert.Fail("This test should have ended up with an error response.");
@@ -115,7 +115,7 @@ namespace RestApi.Test.V2
                 using (var stream = await client.OpenReadTaskAsync(
                     new Uri($"{SetUp.UrlToV2ExampleWF}/{area}?from={date}{(days == null ?  "" : $"&days={days}")}")))
                 {
-                    var data = await JsonSerializer.DeserializeAsync<WeatherForecast[]>(stream);
+                    var data = await JsonSerializer.DeserializeAsync<WeatherForecastV2[]>(stream);
 
                     Assert.That(data.Length, Is.EqualTo(days ?? 5));
                     Assert.That(data.Min(d => d.Date),
@@ -133,7 +133,7 @@ namespace RestApi.Test.V2
                 using (var stream = await client.OpenReadTaskAsync(
                     new Uri($"{SetUp.UrlToV2ExampleWF}/{area}?from={date}")))
                 {
-                    var data = await JsonSerializer.DeserializeAsync<WeatherForecast[]>(stream);
+                    var data = await JsonSerializer.DeserializeAsync<WeatherForecastV2[]>(stream);
                 }
                 Assert.Fail("This test should have ended up with an error response.");
             }
@@ -159,7 +159,7 @@ namespace RestApi.Test.V2
                 using (var stream = await client.OpenReadTaskAsync(
                     new Uri($"{SetUp.UrlToV2ExampleWF}/{area}?from={date}")))
                 {
-                    var data = await JsonSerializer.DeserializeAsync<WeatherForecast[]>(stream);
+                    var data = await JsonSerializer.DeserializeAsync<WeatherForecastV2[]>(stream);
                 }
 
                 Assert.Fail("This test should have ended up with an error response.");

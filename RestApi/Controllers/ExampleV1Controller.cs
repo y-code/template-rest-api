@@ -4,14 +4,16 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RestApi.Models.V1;
+using NSwag.Annotations;
+using RestApi.Models;
 
-namespace RestApi.Controllers.V1
+namespace RestApi.Controllers
 {
     [ApiController]
     [ApiVersion("1")]
-    [Route("api/v{version:apiVersion}/[controller]")]
-    public partial class ExampleController : ControllerBase
+    [Route("api/v{version:apiVersion}/Example")]
+    [OpenApiTag("API Example: Weather Forecast")]
+    public partial class ExampleV1Controller : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
@@ -20,13 +22,13 @@ namespace RestApi.Controllers.V1
 
         private readonly ILogger _logger;
 
-        public ExampleController(ILogger<ExampleController> logger)
+        public ExampleV1Controller(ILogger<ExampleV1Controller> logger)
         {
             _logger = logger;
         }
 
         [HttpGet("{date}")]
-        public virtual IEnumerable<WeatherForecast> Get([FromRoute] string date)
+        public IEnumerable<WeatherForecastV1> Get([FromRoute] string date)
         {
             DateTime baseDate = DateTime.UtcNow;
             if (date != null
@@ -42,17 +44,16 @@ namespace RestApi.Controllers.V1
 
             var random = new Random();
             return Enumerable.Range(0, 5)
-                .Select(index => new WeatherForecast
+                .Select(index => new WeatherForecastV1
                 {
                     Date = baseDate.AddDays(index).ToString("d MMM, yyyy"),
                     TemperatureC = random.Next(-20, 55),
                     Summary = Summaries[random.Next(Summaries.Length)],
-                })
-                .ToArray();
+                });
         }
 
-        [HttpGet()]
-        public virtual IEnumerable<WeatherForecast> Get()
+        [HttpGet]
+        public IEnumerable<WeatherForecastV1> Get()
             => Get(null);
     }
 }

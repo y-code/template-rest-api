@@ -4,14 +4,16 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RestApi.Models.V2;
+using NSwag.Annotations;
+using RestApi.Models;
 
-namespace RestApi.Controllers.V2
+namespace RestApi.Controllers
 {
     [ApiController]
     [ApiVersion("2")]
-    [Route("api/v{version:apiVersion}/[controller]")]
-    public partial class ExampleController : ControllerBase
+    [Route("api/v{version:apiVersion}/Example")]
+    [OpenApiTag("API Example: Weather Forecast")]
+    public partial class ExampleV2Controller : ControllerBase
     {
         private static readonly string[] Areas = new[]
         {
@@ -25,13 +27,13 @@ namespace RestApi.Controllers.V2
 
         private readonly ILogger _logger;
 
-        public ExampleController(ILogger<ExampleController> logger)
+        public ExampleV2Controller(ILogger<ExampleV2Controller> logger)
         {
             _logger = logger;
         }
 
         [HttpGet("WeatherForecast/{area}")]
-        public virtual IEnumerable<WeatherForecast> GetWeatherForecast(
+        public IEnumerable<WeatherForecastV2> GetWeatherForecast(
             [FromRoute] string area,
             [FromQuery] string from,
             [FromQuery] int? days = null)
@@ -62,19 +64,18 @@ namespace RestApi.Controllers.V2
 
             var random = new Random();
             return Enumerable.Range(0, days.Value)
-                .Select(index => areas.Select(a => new WeatherForecast
+                .Select(index => areas.Select(a => new WeatherForecastV2
                 {
                     Area = a,
                     Date = baseDate.AddDays(index),
                     TemperatureC = random.Next(-20, 55),
                     Summary = Summaries[random.Next(Summaries.Length)],
                 }))
-                .SelectMany(w => w)
-                .ToArray();
+                .SelectMany(w => w);
         }
 
         [HttpGet("WeatherForecast")]
-        public virtual IEnumerable<WeatherForecast> GetWeatherForecast(
+        public IEnumerable<WeatherForecastV2> GetWeatherForecast(
             [FromQuery] string from,
             [FromQuery] int? days)
             => GetWeatherForecast(null, from, days);

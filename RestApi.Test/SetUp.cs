@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -59,14 +60,14 @@ namespace RestApi.Test
             DateTime start = DateTime.UtcNow;
             DateTime timeout = DateTime.UtcNow + TimeSpan.FromSeconds(ApiServiceStartUpTimeoutSeconds);
             Exception exception = null;
-            while (DateTime.UtcNow < timeout)
+            while (true)
             {
                 try
                 {
                     await Task.Delay(500);
                     _logger.LogDebug("Checking service startup...");
-                    var client = new System.Net.WebClient();
-                    using (stream = await client.OpenReadTaskAsync(new Uri(UrlToSwagger))) { }
+                    var client = new WebClient();
+                    using (stream = await client.OpenReadTaskAsync(new Uri(ApiServiceBaseUrl))) { }
                     var wakeup = DateTime.UtcNow - start;
                     _logger.LogInformation("API service started successfully.");
                     break;
@@ -74,14 +75,18 @@ namespace RestApi.Test
                 catch (Exception e)
                 {
                     exception = e;
-                }
-            }
+                    if (e is WebException && ((WebException)e).Status != WebExceptionStatus.UnknownError)
+                    {
+                        break;
+                    }
 
-            if (stream == null)
-            {
-                var error = $"Test target API service did not start up within {ApiServiceStartUpTimeoutSeconds} seconds";
-                _logger.LogError(error);
-                throw new Exception(error, exception);
+                    if (DateTime.UtcNow > timeout)
+                    {
+                        var error = $"Test target API service did not start up within {ApiServiceStartUpTimeoutSeconds} seconds";
+                        _logger.LogError(error);
+                        throw new Exception(error, exception);
+                    }
+                }
             }
         }
 
