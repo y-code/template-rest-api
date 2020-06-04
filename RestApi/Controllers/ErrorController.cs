@@ -7,8 +7,7 @@ using NSwag.Annotations;
 namespace RestApi.Controllers
 {
     [ApiController]
-    [ApiVersion("1")]
-    [ApiVersion("2")]
+    [ApiVersionNeutral]
     [Route("api/[controller]")]
     [OpenApiIgnore]
     public class ErrorController : ControllerBase
