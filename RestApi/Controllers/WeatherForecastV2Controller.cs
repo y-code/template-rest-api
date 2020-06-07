@@ -10,10 +10,10 @@ using RestApi.Models;
 namespace RestApi.Controllers
 {
     [ApiController]
-    [ApiVersion("2")]
-    [Route("api/v{version:apiVersion}/Example")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/WeatherForecast")]
     [OpenApiTag("API Example: Weather Forecast")]
-    public partial class ExampleV2Controller : ControllerBase
+    public partial class WeatherForecastV2Controller : ControllerBase
     {
         private static readonly string[] Areas = new[]
         {
@@ -27,12 +27,12 @@ namespace RestApi.Controllers
 
         private readonly ILogger _logger;
 
-        public ExampleV2Controller(ILogger<ExampleV2Controller> logger)
+        public WeatherForecastV2Controller(ILogger<WeatherForecastV2Controller> logger)
         {
             _logger = logger;
         }
 
-        [HttpGet("WeatherForecast/{area}")]
+        [HttpGet("Area/{area}")]
         public IEnumerable<WeatherForecastV2> GetWeatherForecast(
             [FromRoute] string area,
             [FromQuery] string from,
@@ -74,7 +74,10 @@ namespace RestApi.Controllers
                 .SelectMany(w => w);
         }
 
-        [HttpGet("WeatherForecast")]
+        // This can be also done by endpoint above with optional route parameter in ASP.NET Core Web API.
+        // However, OpenAPI Specification does not support it, and neither do NSwag.
+        [HttpGet("Area")]
+        [HttpGet]
         public IEnumerable<WeatherForecastV2> GetWeatherForecast(
             [FromQuery] string from,
             [FromQuery] int? days)

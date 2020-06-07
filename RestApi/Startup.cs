@@ -33,7 +33,7 @@ namespace RestApi
             services.AddOpenApiDocument(settings =>
             {
                 settings.DocumentName = "v1";
-                settings.Version = "1.0.0";
+                settings.Version = "1.X";
                 settings.GenerateExamples = false;
                 settings.UseRouteNameAsOperationId = true;
                 settings.Title = "SWAGGER-TITLE";
@@ -42,7 +42,7 @@ namespace RestApi
             services.AddOpenApiDocument(settings =>
             {
                 settings.DocumentName = "v2";
-                settings.Version = "2.0.0";
+                settings.Version = "2.X";
                 settings.Title = "SWAGGER-TITLE";
                 settings.ApiGroupNames = new[] { "ver. 2" };
             });

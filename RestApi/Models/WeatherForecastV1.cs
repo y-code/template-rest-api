@@ -11,6 +11,15 @@ namespace RestApi.Models
         public string Date { get; set; }
         [JsonPropertyName("summary")]
         public string Summary { get; set; }
+    }
+
+    [JsonSchema(name: "WeatherForecast1")]
+    public class WeatherForecastV1_1
+    {
+        [JsonPropertyName("date")]
+        public string Date { get; set; }
+        [JsonPropertyName("summary")]
+        public string Summary { get; set; }
         [JsonPropertyName("temperatureC")]
         public int TemperatureC { get; set; }
         [JsonPropertyName("temperatureF")]
