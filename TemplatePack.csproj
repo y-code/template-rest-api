@@ -4,7 +4,7 @@
     <PackageId>Ycode.RestApi</PackageId>
     <PackageType>Template</PackageType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.0</Version>
+    <Version>1.1.0</Version>
     <Title>ASP.NET Core Web API with API Documentation</Title>
     <Authors>Yas Ikeda (ycode.laboratory@gmail.com)</Authors>
     <Description>A C# project template that contains a simple ASP.NET Core Web API with API documentation by NSwag.</Description>
