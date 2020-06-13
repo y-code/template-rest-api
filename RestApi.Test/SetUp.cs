@@ -18,9 +18,9 @@ namespace RestApi.Test
 
         public const string ApiServiceBaseUrl = "https://localhost:62184";
         public const string UrlToSwagger = ApiServiceBaseUrl + "/swagger";
-        public const string UrlToV1Example = ApiServiceBaseUrl + "/api/v1/Example";
-        public const string UrlToV2Example = ApiServiceBaseUrl + "/api/v2/Example";
-        public const string UrlToV2ExampleWF = ApiServiceBaseUrl + "/api/v2/Example/WeatherForecast";
+        public const string UrlToV1Example = ApiServiceBaseUrl + "/api/v1/WeatherForecast";
+        public const string UrlToV1_1Example = ApiServiceBaseUrl + "/api/v1.1/WeatherForecast";
+        public const string UrlToV2Example = ApiServiceBaseUrl + "/api/v2/WeatherForecast";
 
         static ILoggerFactory _loggerFactory;
         static Microsoft.Extensions.Logging.ILogger _logger;
